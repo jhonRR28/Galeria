@@ -25,3 +25,15 @@ class CustomLogoutView(LogoutView):
 
     def get_next_page(self):
         return reverse_lazy('gallery_list') 
+
+#Detalles de Galeria
+class GalleryDetailView(DetailView):
+    model = Gallery
+    template_name = 'gallery/gallery_detail.html'
+    context_object_name = 'gallery'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Agrega las imágenes asociadas a la galería en el contexto
+        context['images'] = self.object.images.all()
+        return context

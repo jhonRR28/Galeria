@@ -24,5 +24,6 @@ urlpatterns = [
     path('home/', views.GalleryListView.as_view(),name='gallery_list'),
     path('my-galleries/', views.user_galleries, name='user_galleries'),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'), 
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('gallery/<int:pk>/', views.GalleryDetailView.as_view(), name='gallery_detail'),
 ]

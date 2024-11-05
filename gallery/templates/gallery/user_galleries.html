@@ -24,6 +24,7 @@
                             <h5 class="card-title">{{ gallery.title }}</h5>
                             <p class="card-text">{{ gallery.description|truncatewords:20 }}</p>
                             <small class="text-muted">Creado el: {{ gallery.created_at }}</small>
+                            <a href="{% url 'gallery_detail' gallery.pk %}" class="btn btn-primary">Detalles</a>
                         </div>
                     </div>
                 </div>
