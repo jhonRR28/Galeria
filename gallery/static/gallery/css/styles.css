@@ -200,4 +200,26 @@ html, body {
     margin-bottom: 20px;
 }
 
+/* Limita la altura del modal y permite desplazamiento */
+.custom-modal-content {
+    max-height: 95vh; /* Limita la altura para que no sea más grande que la pantalla */
+    overflow-y: auto; /* Habilita desplazamiento si el contenido es muy largo */
+}
+.modal-body {
+    display: flex;
+    align-items: center;
+    height: 50%;
+}
+.modal-image {
+    height: 72vh;
+}
+.custom-image {
+    height: 100%; /* Limita la altura de la imagen */
+    width: auto; /* Mantiene la proporción de la imagen */
+    object-fit: contain; /* Ajusta la imagen sin distorsionarla */
+}
+.modal-description {
+    max-width: 65%; /* Ajusta el ancho de la descripción */
+}
+
 
