@@ -6,6 +6,7 @@ class Gallery(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='galleries')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to='gallery/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

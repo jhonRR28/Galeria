@@ -120,6 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -130,3 +133,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'media'),
 	)
+
+# settings.py
+LOGOUT_REDIRECT_URL = '/home'  # Redirige a la página principal o a cualquier otra página deseada.
+
+LOGIN_URL = 'login'  # Asegúrate de que coincida con el nombre de la URL
+LOGIN_REDIRECT_URL = 'gallery_list'  # Donde redirigir después de iniciar sesión

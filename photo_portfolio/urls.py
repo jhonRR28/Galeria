@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from gallery import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.GalleryListView.as_view(),name='gallery_list'),
+    path('my-galleries/', views.user_galleries, name='user_galleries'),
+    path('logout/', views.CustomLogoutView.as_view(), name='logout'),
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'), 
 ]

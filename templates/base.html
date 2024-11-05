@@ -1,15 +1,38 @@
-{% extends 'gallery/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Galería{% endblock %}</title>
+    {% load static %}
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'gallery/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+    {% block body %}
+        <!-- Bloque del navbar utilizado -->
+        {% block nav_bar %} 
+            {% include 'gallery/admin/_nav_bar.html' %} 
+        {% endblock %}
+        
+        <div class="container-main flex-grow-1">
+            {% block content %}
+                {% block section %}{% endblock section %}
+                {% block maincontent %}{% endblock maincontent %}
+            {% endblock %}
+        </div>
+    {% endblock body %}
 
-{% block title %} Portafolio de Fotografia {% endblock %}
-{% block bodyclass %} skin-red {% endblock %}
-{% block content %}
-    <div class="container">
-        {% block section %}
-        {% endblock section %}
-    </div>
-    <div class="container">
-        {% block maincontent %}
-        {% endblock maincontent %}
-    </div>
-  
-{% endblock %}
+    <!-- Bloque del footer -->
+    {% block footer %}
+        {% include 'gallery/admin/_footer.html' %}
+    {% endblock %}
+
+    {% block javascript %}
+        {% include 'gallery/admin/_scripts.html' %}
+    {% endblock %}
+</body>
+</html>

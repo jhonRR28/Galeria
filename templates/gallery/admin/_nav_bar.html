@@ -1,23 +1,35 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Portafolio de Fotografia</a>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <a class="navbar-brand" href="#">Portafolio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Inicio</a>
+                <a class="nav-link" href="{% url 'gallery_list' %}">Inicio</a>  
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Galería</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Imagenes</a>
+                <a class="nav-link" href="{% url 'user_galleries' %}">Mis Galerías</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contacto</a>
             </li>
+            <!-- Menú de perfil del usuario -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> {% firstof user.get_username user.get_short_name %} <!-- Mostrar nombre de usuario -->
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#">Perfil</a>
+                    <div class="dropdown-divider"></div>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="dropdown-item">Cerrar sesión</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="dropdown-item">Iniciar sesión</a>
+                    {% endif %}
+                </div>
+            </li>
         </ul>
-    </div>
+    </div>
 </nav>

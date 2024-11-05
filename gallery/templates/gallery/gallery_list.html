@@ -1,33 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
 {% block section %}
- <h2>Galerias</h2>
- <hr>
+<div class="welcome-section">
+    <div class="welcome-banner"></div>
+    <h2>Bienvenidos al Portafolio de Fotografía</h2>
+    <p>Explora nuestras galerías y descubre impresionantes fotografías.</p>
+</div>
 {% endblock section %}
 
 {% block maincontent %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for c in object_list %}
-  <div class="col">
-    <div class="card">
-      <img src="https://estaticos-cdn.prensaiberica.es/clip/d5a464ff-e265-49ff-96d2-41286d033007_source-aspect-ratio_default_0.jpg" style="width:330px;height:330px" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{ c.title }}</h5>
-        <p class="card-text">{{ c.description }}</p>
-        <a href="#" class="btn btn-primary">Detalles</a>
-      </div>
+<section class="gallery-section py-5">
+    <div class="container">
+        <div class="row">
+            {% for gallery in object_list %}
+                <div class="col-md-4 card-gallery">
+                    <div class="card mb-4 shadow-sm ">
+                        <img src="{% static gallery.photo.url %}" class="card-img-top" alt="Galería">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ gallery.title }}</h5>
+                            <p class="card-text">{{ gallery.description }}</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-  </div>
-    {% endfor %}
-  <div class="col">
-    <div class="card">
-      <img src="https://img.ecologiahoy.com/2012/02/Lluvia.jpg" style="width:330px;height:330px" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Gotas al azar</h5>
-        <p class="card-text">Para los amantes de la lluvia que resuena en los tejados como cantar para conciliar el sueño</p>
-        <a href="#" class="btn btn-primary">Detalles</a>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 {% endblock maincontent %}
