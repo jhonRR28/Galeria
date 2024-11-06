@@ -8,6 +8,8 @@ html, body {
 .container-main {
     margin: 0;
     padding: 0;
+    background-color: #d7d7cb; /* Color específico para la galería */
+
 }
 
 .container {    
@@ -227,6 +229,7 @@ html, body {
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: opacity 0.3s ease;
@@ -292,3 +295,4 @@ html, body {
 .gallery-section {
     background-color: #d7d7cb; /* Color específico para la galería */
 }
+

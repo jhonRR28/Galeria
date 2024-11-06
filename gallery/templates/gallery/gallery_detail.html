@@ -3,42 +3,50 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>{{ gallery.title }}</h2>
-    <p>{{ gallery.description }}</p>
+    <!-- Contenedor para título, descripción y botones alineados a la derecha -->
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h2>{{ gallery.title }}</h2>
+            <p>{{ gallery.description }}</p>
+        </div>
+        
+        <!-- Botones de modificar, eliminar y agregar imagen alineados a la derecha -->
+        {% if is_owner %}
+        <div class="d-flex gap-2">
+            <a href="{% url 'edit_gallery' gallery.id %}" class="btn btn-warning btn-sm mr-3">Modificar Galería</a>
+            <a href="{% url 'delete_gallery' gallery.id %}" class="btn btn-danger btn-sm mr-3">Eliminar Galería</a>
+            <a href="{% url 'add_image_to_gallery' gallery.id %}" class="btn btn-primary btn-sm">Agregar Imagen</a>
+        </div>
+        {% endif %}
+    </div>
 
     <!-- Muestra las imágenes de la galería -->
-    <div class="gallery-images row">
+    <div class="gallery-section row">
         {% for image in images %}
             <div class="col-md-4 mb-3">
-                <img src="{% static image.image_file.url %}" alt="{{ image.title }}" class="img-thumbnail">
-                
-                <!-- Botones de modificar y eliminar para cada imagen -->
-                {% if is_owner %}
-                    <div class="mt-2 d-flex justify-content-between">
-                        <a href="{% url 'edit_image' image.id %}" class="btn btn-outline-warning btn-sm">Modificar</a>
-                        <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta imagen?');">Eliminar</button>
-                        </form>
+                <div class="card mb-0 shadow-sm border-0 overflow-hidden rounded-lg card-square">
+                    <div class="card-image-wrapper position-relative">
+                        <img src="{% static image.image_file.url %}" alt="{{ image.title }}" class="card-img-top">
+                        
+                        <!-- Overlay que contiene el título y botones -->
+                        <div class="card-overlay d-flex flex-column justify-content-end p-3 text-white">
+                            <h5 class="card-title">{{ image.title }}</h5>
+
+                            <!-- Contenedor para los botones, alineados a izquierda y derecha -->
+                            <div class="d-flex justify-content-between w-100 gap-2">
+                                <a href="{% url 'edit_image' image.id %}" class="btn btn-warning btn-sm">Modificar</a>
+                                <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta imagen?');">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                {% endif %}
+                </div>
             </div>
         {% empty %}
             <p class="text-muted">No hay imágenes en esta galería.</p>
         {% endfor %}
     </div>
-
-    <!-- Mostrar botones solo si el usuario es el propietario de la galería -->
-    {% if is_owner %}
-        <div class="mt-4 d-flex justify-content-start">
-            <a href="{% url 'edit_gallery' gallery.id %}" class="btn btn-outline-warning mr-2">Modificar Galería</a>
-            <a href="{% url 'delete_gallery' gallery.id %}" class="btn btn-outline-danger mr-2">Eliminar Galería</a>
-            <a href="{% url 'add_image_to_gallery' gallery.id %}" class="btn btn-outline-primary mr-2">Agregar Imagen</a>
-        </div>
-    {% else %}
-        <p class="text-muted mt-4">No puedes modificar esta galería.</p>
-    {% endif %}
 </div>
 {% endblock %}
-
-
