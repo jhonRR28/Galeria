@@ -35,9 +35,9 @@
                             <!-- Contenedor para los botones, alineados a izquierda y derecha -->
                             <div class="d-flex justify-content-between w-100 gap-2">
                                 <a href="{% url 'edit_image' image.id %}" class="btn btn-warning btn-sm">Modificar</a>
-                                <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;">
+                                <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;" class="delete-image-form">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta imagen?');">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" >Eliminar</button>
                                 </form>
                             </div>
                         </div>
