@@ -86,6 +86,8 @@ html, body {
     font-weight: bold;
 }
 
+/* Footer */
+
 .footer-custom {
     background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
     color: white;

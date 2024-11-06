@@ -1,39 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ gallery.title }} - Galería{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ gallery.title }}</h2>
+    <p>{{ gallery.description }}</p>
 
-{% block section %}
-<div class="container py-4">
-    <h1 class="display-4">{{ gallery.title }}</h1>
-    <p class="lead">{{ gallery.description }}</p>
-    <p>Propietario: <strong>{{ gallery.user.username }}</strong></p>
-    <p>Fecha de creación: {{ gallery.created_at|date:"d M Y H:i" }}</p>
-</div>
-<hr>
-{% endblock %}
-
-{% block maincontent %}
-<div class="container py-4">
-    <h2 class="h4 mt-4">Imágenes en esta galería</h2>
-    <div class="row">
+    <!-- Muestra las imágenes de la galería -->
+    <div class="gallery-images row">
         {% for image in images %}
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="{% static image.image_file.url %}" class="card-img-top" alt="{{ image.title }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ image.title }}</h5>
-                        <p class="card-text">{{ image.description }}</p>
-                        <p class="text-muted">Subido el: {{ image.uploaded_at|date:"d M Y H:i" }}</p>
-                        {% if image.allow_download %}
-                            <a href="{{ image.image_file.url }}" class="btn btn-primary btn-sm" download>Descargar</a>
-                        {% endif %}
-                    </div>
-                </div>
+            <div class="col-md-4 mb-3">
+                <img src="{% static image.image_file.url %}" alt="{{ image.title }}" class="img-thumbnail">
             </div>
         {% empty %}
             <p class="text-muted">No hay imágenes en esta galería.</p>
         {% endfor %}
     </div>
+
+    <!-- Mostrar botones solo si el usuario es el propietario de la galería -->
+    {% if is_owner %}
+        <div class="mt-4 d-flex justify-content-start">
+            <!-- Botón para modificar la galería -->
+            <a href="{% url 'edit_gallery' gallery.id %}" class="btn btn-outline-warning mr-2">Modificar Galería</a>
+            <a href="{% url 'add_image_to_gallery' gallery.id %}" class="btn btn-outline-primary">Agregar Imagen</a>
+        </div>
+    {% else %}
+        <p class="text-muted mt-4">No puedes modificar esta galería.</p>
+    {% endif %}
 </div>
 {% endblock %}
+
