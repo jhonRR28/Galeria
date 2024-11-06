@@ -202,26 +202,93 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* Limita la altura del modal y permite desplazamiento */
-.custom-modal-content {
-    max-height: 95vh; /* Limita la altura para que no sea más grande que la pantalla */
-    overflow-y: auto; /* Habilita desplazamiento si el contenido es muy largo */
+/* ... Mantén los estilos anteriores ... */
+
+/* Asegura que las imágenes se ajusten al contenedor sin bordes adicionales */
+.gallery-section .card-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 250px; /* Altura ajustable */
 }
-.modal-body {
+
+.gallery-section .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Define el overlay para que sea completamente responsivo */
+.gallery-section .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
     display: flex;
+    justify-content: center;
     align-items: center;
-    height: 50%;
+    transition: opacity 0.3s ease;
 }
-.modal-image {
-    height: 72vh;
+
+/* Muestra el overlay solo al pasar el cursor */
+.gallery-section .card:hover .card-overlay {
+    opacity: 1;
 }
-.custom-image {
-    height: 100%; /* Limita la altura de la imagen */
-    width: auto; /* Mantiene la proporción de la imagen */
-    object-fit: contain; /* Ajusta la imagen sin distorsionarla */
+
+/* Estilos de contenido dentro del overlay */
+.gallery-section .card-overlay h5 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
 }
-.modal-description {
-    max-width: 65%; /* Ajusta el ancho de la descripción */
+
+.gallery-section .card-overlay .btn {
+    margin-top: 10px;
+    background-color: #f0db4f;
+    border: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.gallery-section .card-overlay .btn:hover {
+    background-color: #e5c43b;
 }
 
 
+/* Estilos para hacer las cartas cuadradas y asegurar que la imagen cubra todo el espacio */
+.gallery-section .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 1 / 1; /* Mantiene las cartas cuadradas */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.gallery-section .card-image-wrapper {
+    width: 100%;
+    height: 100%; /* Asegura que el contenedor ocupe todo el espacio de la carta */
+    overflow: hidden;
+}
+
+.gallery-section .card-img-top {
+    width: 100%;
+    height: 100%; /* Hace que la imagen llene el contenedor */
+    object-fit: cover; /* Ajusta la imagen para llenar el contenedor */
+}
+
+.gallery-section .row {
+    gap: 0px; /* Alternativa usando gap */
+}
+
+.gallery-section .col {
+    margin-bottom: 40px;
+}
+
+.gallery-section {
+    background-color: #d7d7cb; /* Color específico para la galería */
+}
