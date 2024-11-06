@@ -28,4 +28,8 @@ urlpatterns = [
     path('gallery/<int:pk>/', views.GalleryDetailView.as_view(), name='gallery_detail'),
     path('gallery/<int:gallery_id>/add_image/', views.add_image_to_gallery, name='add_image_to_gallery'),
     path('gallery/<int:gallery_id>/edit/', views.edit_gallery, name='edit_gallery'),
+    path('galeria/<int:pk>/eliminar/', views.GalleryDeleteView.as_view(), name='delete_gallery'),
+    path('gallery/add/', views.add_gallery, name='add_gallery'),
+    path('imagen/<int:image_id>/eliminar/', views.delete_image, name='delete_image'),
+    path('imagen/<int:image_id>/editar/', views.edit_image, name='edit_image'),
 ]

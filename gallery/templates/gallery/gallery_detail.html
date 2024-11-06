@@ -11,6 +11,17 @@
         {% for image in images %}
             <div class="col-md-4 mb-3">
                 <img src="{% static image.image_file.url %}" alt="{{ image.title }}" class="img-thumbnail">
+                
+                <!-- Botones de modificar y eliminar para cada imagen -->
+                {% if is_owner %}
+                    <div class="mt-2 d-flex justify-content-between">
+                        <a href="{% url 'edit_image' image.id %}" class="btn btn-outline-warning btn-sm">Modificar</a>
+                        <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta imagen?');">Eliminar</button>
+                        </form>
+                    </div>
+                {% endif %}
             </div>
         {% empty %}
             <p class="text-muted">No hay imágenes en esta galería.</p>
@@ -20,13 +31,14 @@
     <!-- Mostrar botones solo si el usuario es el propietario de la galería -->
     {% if is_owner %}
         <div class="mt-4 d-flex justify-content-start">
-            <!-- Botón para modificar la galería -->
             <a href="{% url 'edit_gallery' gallery.id %}" class="btn btn-outline-warning mr-2">Modificar Galería</a>
-            <a href="{% url 'add_image_to_gallery' gallery.id %}" class="btn btn-outline-primary">Agregar Imagen</a>
+            <a href="{% url 'delete_gallery' gallery.id %}" class="btn btn-outline-danger mr-2">Eliminar Galería</a>
+            <a href="{% url 'add_image_to_gallery' gallery.id %}" class="btn btn-outline-primary mr-2">Agregar Imagen</a>
         </div>
     {% else %}
         <p class="text-muted mt-4">No puedes modificar esta galería.</p>
     {% endif %}
 </div>
 {% endblock %}
+
 
