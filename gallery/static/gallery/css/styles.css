@@ -8,6 +8,8 @@ html, body {
 .container-main {
     margin: 0;
     padding: 0;
+    background-color: #d7d7cb; /* Color específico para la galería */
+
 }
 
 /* Estilos para el header con imagen de fondo */
@@ -225,6 +227,7 @@ html, body {
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: opacity 0.3s ease;
