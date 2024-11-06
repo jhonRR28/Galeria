@@ -1,12 +1,38 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <div class="container mt-4">
-    <h2>Editar Galería</h2>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    </form>
-    <a href="{% url 'gallery_detail' gallery.id %}" class="btn btn-secondary mt-3">Volver a la Galería</a>
+    <h2 class="text-center mb-5">Editar Galería</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form method="POST" enctype="multipart/form-data" class="p-4 rounded shadow-sm" style="background-color: #ffffff; border: 1px solid #dee2e6;">
+                {% csrf_token %}
+                
+                <!-- Título -->
+                <div class="form-group mb-4">
+                    <label for="id_title" class="font-weight-bold">Título</label>
+                    <input type="text" name="title" id="id_title" class="form-control" placeholder="Título de la galería" value="{{ form.title.value|default_if_none:'' }}">
+                </div>
+
+                <!-- Descripción -->
+                <div class="form-group mb-4">
+                    <label for="id_description" class="font-weight-bold">Descripción</label>
+                    <textarea name="description" id="id_description" class="form-control" placeholder="Descripción de la galería" rows="4">{{ form.description.value|default_if_none:'' }}</textarea>
+                </div>
+
+                <!-- Foto de portada -->
+                <div class="form-group mb-4">
+                    <label for="id_photo" class="font-weight-bold">Foto de portada</label>
+                    <input type="file" name="photo" id="id_photo" class="form-control-file">
+                </div>
+
+                <!-- Botón Guardar Cambios -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary btn-form" style="width: 45%;">Guardar Cambios</button>
+                    <a href="{% url 'gallery_detail' gallery.id %}" class="btn btn-secondary btn-form-2" style="width: 45%;">Volver a la Galería</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

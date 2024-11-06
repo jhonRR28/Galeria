@@ -11,14 +11,16 @@
         {% for image in images %}
             <div class="col-md-4 mb-3">
                 <img src="{% static image.image_file.url %}" alt="{{ image.title }}" class="img-thumbnail">
-                
+
                 <!-- Botones de modificar y eliminar para cada imagen -->
                 {% if is_owner %}
                     <div class="mt-2 d-flex justify-content-between">
                         <a href="{% url 'edit_image' image.id %}" class="btn btn-outline-warning btn-sm">Modificar</a>
-                        <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;">
+                        
+                        <!-- Formulario de eliminación de imagen -->
+                        <form action="{% url 'delete_image' image.id %}" method="post" style="display:inline;" class="delete-image-form">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta imagen?');">Eliminar</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
                         </form>
                     </div>
                 {% endif %}

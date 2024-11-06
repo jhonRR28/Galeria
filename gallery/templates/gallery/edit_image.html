@@ -2,17 +2,50 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Modificar Imagen</h2>
-    
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        
-        <div class="mt-3">
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-            <a href="{% url 'gallery_detail' image.gallery.id %}" class="btn btn-secondary">Cancelar</a>
+<div class="container mt-5">
+    <h2 class="text-center mb-5">Modificar Imagen</h2>
+
+    <div class="row justify-content-center">
+        <!-- Aumento de tamaño del formulario -->
+        <div class="col-md-10 col-lg-8">
+            <form method="post" enctype="multipart/form-data" class="p-4 rounded shadow-sm" style="background-color: #ffffff; border: 1px solid #dee2e6;">
+                {% csrf_token %}
+
+                <!-- Título de la imagen -->
+                <div class="form-group mb-4">
+                    <label for="id_title" class="font-weight-bold">Título de la Imagen</label>
+                    <input type="text" name="title" id="id_title" class="form-control" placeholder="Título de la imagen" value="{{ form.title.value|default_if_none:'' }}">
+                </div>
+
+                <!-- Descripción de la imagen -->
+                <div class="form-group mb-4">
+                    <label for="id_description" class="font-weight-bold">Descripción</label>
+                    <textarea name="description" id="id_description" class="form-control" placeholder="Descripción de la imagen" rows="4">{{ form.description.value|default_if_none:'' }}</textarea>
+                </div>
+
+                <!-- Imagen actual -->
+                <div class="form-group mb-4">
+                    <label for="current_image" class="font-weight-bold">Imagen Actual</label>
+                    <div class="mb-2">
+                        <img src="{% static image.image_file.url %}" alt="Imagen Actual" class="img-fluid" style="max-height: 200px; object-fit: cover;">
+                    </div>
+                    <small class="text-muted">Si deseas cambiar la imagen, selecciona una nueva.</small>
+                </div>
+
+                <!-- Nuevo archivo de imagen (opcional) -->
+                <div class="form-group mb-4">
+                    <label for="id_image_file" class="font-weight-bold">Seleccionar Nueva Imagen</label>
+                    <input type="file" name="image_file" id="id_image_file" class="form-control-file">
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary btn-form" style="width: 45%;">Guardar Cambios</button>
+                    <a href="{% url 'gallery_detail' image.gallery.id %}" class="btn btn-secondary btn-form-2" style="width: 45%;">Cancelar</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
+

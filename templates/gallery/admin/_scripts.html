@@ -5,6 +5,34 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Personalizar el comportamiento del formulario de eliminación con SweetAlert2
+    const deleteForms = document.querySelectorAll('.delete-image-form');
+    
+    deleteForms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío inmediato del formulario
+
+            // SweetAlert2 confirmación de eliminación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás recuperar esta imagen después de eliminarla!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarla',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Enviar el formulario si el usuario confirma
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
 
 
